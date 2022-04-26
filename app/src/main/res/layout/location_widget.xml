@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.Lab4.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:id="@+id/location_widget"
+    android:layout_height="match_parent"
+    android:background="@color/dark_pink"
+    android:padding="0dp">
+
+    <LinearLayout
+        android:id="@+id/section"
+        style="@style/WidgetSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/appwidget_id_label"
+            style="@style/WidgetLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/your_location" />
+
+        <TextView
+            android:id="@+id/appwidget_latitude"
+            style="@style/WidgetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/latitude_1_s"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/appwidget_longitude"
+            style="@style/WidgetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/longitude_1_s"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+</RelativeLayout>
