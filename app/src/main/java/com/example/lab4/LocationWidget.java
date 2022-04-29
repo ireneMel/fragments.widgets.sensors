@@ -27,33 +27,24 @@ public class LocationWidget extends AppWidgetProvider {
         String latitude = sharedPreferences.getString(LATITUDE_KEY, "DEFAULT");
         String longitude = sharedPreferences.getString(LONGITUDE_KEY, "DEFAULT");
 
-//        String longitude = LocationFragment.getSharedPref(LONGITUDE_KEY, "longitude");
-//        String latitude = LocationFragment.getSharedPref(LATITUDE_KEY, "latitude");
-
-//        Log.v(LATITUDE_KEY, longitude);
-//        Log.v(LATITUDE_KEY, latitude);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.location_widget);
         views.setTextViewText(R.id.appwidget_longitude, context.getResources().getString(R.string.longitude_1_s, longitude));
         views.setTextViewText(R.id.appwidget_latitude, context.getResources().getString(R.string.latitude_1_s, latitude));
 
-//        SharedPreferences.Editor pref = sharedPreferences.edit();
-//        pref.putString(LONGITUDE_KEY, longitude);
-//        pref.putString(LATITUDE_KEY, latitude);
-//        pref.apply();
+        SharedPreferences.Editor pref = sharedPreferences.edit();
+        pref.putString(LONGITUDE_KEY, longitude);
+        pref.putString(LATITUDE_KEY, latitude);
+        pref.apply();
 
         Intent intent = new Intent(context, LocationWidget.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         int[] idArray = new int[]{appWidgetId};
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
-//        context.sendBroadcast(intent);
 
         PendingIntent pendingUpdate = PendingIntent.getBroadcast(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.location_widget, pendingUpdate);
 
-//        ComponentName component = new ComponentName(context, WidgetTaskSchedular.class);
-//        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds[i], R.id.listWidget);
-//        appWidgetManager.updateAppWidget(component, remoteView);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
