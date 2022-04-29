@@ -18,9 +18,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link CoordinatesFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * by sensors finds azimuth, pitch and poll
+ * displays them
  */
 public class CoordinatesFragment extends Fragment implements SensorEventListener {
 
@@ -34,10 +33,6 @@ public class CoordinatesFragment extends Fragment implements SensorEventListener
 
     public CoordinatesFragment() {
         // Required empty public constructor
-    }
-
-    public static CoordinatesFragment newInstance() {
-        return new CoordinatesFragment();
     }
 
     @Override
@@ -56,12 +51,7 @@ public class CoordinatesFragment extends Fragment implements SensorEventListener
 
         final Toolbar toolbar = rootView.findViewById(R.id.toolbar_home);
         toolbar.setNavigationIcon(R.drawable.ic_back_24);
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
+        toolbar.setOnClickListener(view -> getActivity().onBackPressed());
 
         mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         mSensorAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);

@@ -7,7 +7,7 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="see_coordinates">see coordinates</string>
-    <string name="widget_string">The app also implements widget, which shows location of this device</string>
+    <string name="widget_string">The app also implements widget, which shows location of this device. Widget updates by widgets time or when app is displayed</string>
     <string name="your_location">Your location:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

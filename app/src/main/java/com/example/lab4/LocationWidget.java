@@ -32,11 +32,6 @@ public class LocationWidget extends AppWidgetProvider {
         views.setTextViewText(R.id.appwidget_longitude, context.getResources().getString(R.string.longitude_1_s, longitude));
         views.setTextViewText(R.id.appwidget_latitude, context.getResources().getString(R.string.latitude_1_s, latitude));
 
-        SharedPreferences.Editor pref = sharedPreferences.edit();
-        pref.putString(LONGITUDE_KEY, longitude);
-        pref.putString(LATITUDE_KEY, latitude);
-        pref.apply();
-
         Intent intent = new Intent(context, LocationWidget.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         int[] idArray = new int[]{appWidgetId};
