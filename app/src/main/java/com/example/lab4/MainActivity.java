@@ -1,20 +1,12 @@
 package com.example.lab4;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.AsyncTask;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,13 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         inputActivity = binding.inputFromActivity;
 
-        LocationFragment fr = new LocationFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_coord, fr)
-                .hide(fr)
-                .commit();
-
-        //request permission for location
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 15);
+        getPermissionForLocation();
 
         if (savedInstanceState != null) {
             isTextDisplayed = savedInstanceState.getBoolean(STATE_FRAGMENT_TEXT);
@@ -123,6 +109,35 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         } else {
             getSupportFragmentManager().popBackStack();
+        }
+    }
+
+    private void getPermissionForLocation() {
+        //request permission for location
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        } else {
+            Log.d("permissions", "permission granted");
+
+            LocationFragment fr = new LocationFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container_coord, fr)
+                    .hide(fr)
+                    .commit();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getPermissionForLocation();
+            } else {
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
