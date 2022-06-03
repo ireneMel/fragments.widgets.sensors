@@ -3,7 +3,7 @@ sensors, creating and updating widgets, get location of device and interactions 
 fragments and activitiy
 
   Contains 3 fragments, widget and MainActivity.
-  Main activity implements logic for caliing different fragments. ASks
+  Main activity implements logic for caliing different fragments. Asks
 for permission of location.
   Coordinates fragment finds azimuth, pitch and poll by magnetometer and accelerometer sensors.
 Sets the data in fragment, updates data
